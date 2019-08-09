@@ -15,18 +15,18 @@ int main(int argc, char *argv[]) { //./plotWithRoot_Occupancy path/to/directory 
 	gStyle->SetTextFont();
 
 
-	if (argc < 4) {
+	if (argc < 3) {
 		std::cout << "No directory and/or image plot extension given! \nExample: ./plotWithRoot_Occupancy path/to/directory/ pdf" << std::endl;
 		return -1;
 	}
 
 	std::string dir, filepath, file_name, chipnum;
 	DIR *dp; //Directory Stream
-	DIR *dp_t;
+	
 	struct dirent *dirp;
-	struct dirent *dirp_t;
+	
 	struct stat filestat;
-	struct stat filestat_t;
+	
 
 	std::string delimiter = "_";
 	std::string ext = argv[2]; //png, pdf, C, root
@@ -38,16 +38,16 @@ int main(int argc, char *argv[]) { //./plotWithRoot_Occupancy path/to/directory 
 		std::cout << "Directory not found. " << std::endl;
 		return -1;
 	}
-	if (dp_t==NULL) {	//if directory doesn't exist
-		std::cout << "Directory not found. " << std::endl;
-		return -1;
-	}
+	
+	
+		
+	
 
 	dir = argv[1];
 	
 	//MAIN:
 
-	while ((dirp = readdir(dp)) && (dirp_t = readdir(dp_t))) { //pointer to structure representing directory entry at current position in directory stream, and positions directory stream at the next entry. Returns a null pointer at the end of the directory stream.
+	while ((dirp = readdir(dp))) { //pointer to structure representing directory entry at current position in directory stream, and positions directory stream at the next entry. Returns a null pointer at the end of the directory stream.
 
 		file_name = dirp->d_name;
 		filepath = dir + "/" + dirp->d_name;
